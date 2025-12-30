@@ -14,22 +14,16 @@ const openai = new OpenAI({
 });
 
 app.post("/chat", async (req, res) => {
-  try {
-    const userMessage = req.body.message;
+  const userMessage = req.body.message;
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: userMessage }]
-    });
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: userMessage }]
+  });
 
-    res.json({
-      reply: response.choices[0].message.content
-    });
-  } catch (err) {
-    res.status(500).json({ error: "AI error" });
-  }
+  res.json({ reply: completion.choices[0].message.content });
 });
 
 app.listen(3000, () => {
-  console.log("Server running on port 3000");
+  console.log("Server running");
 });
