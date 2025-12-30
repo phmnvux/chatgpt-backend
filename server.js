@@ -14,14 +14,7 @@ const openai = new OpenAI({
 });
 
 app.post("/chat", async (req, res) => {
-  const userMessage = req.body.message;
-
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [{ role: "user", content: userMessage }]
-  });
-
-  res.json({ reply: completion.choices[0].message.content });
+  res.json({ reply: "Backend đã nhận được tin nhắn" });
 });
 
 app.listen(3000, () => {
